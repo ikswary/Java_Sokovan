@@ -9,11 +9,10 @@ import javax.swing.JTextArea;
 // MouseEvent 처리	-> MouseListenera
 
 // 키 입력 이벤트 처리 인터페이스 KeyListener 구현
-class MyFrame5 extends JFrame implements KeyListener{
-
+public class awtTest extends JFrame implements KeyListener {
     JTextArea ta = new JTextArea();
 
-    public MyFrame5(){
+    public awtTest() {
         ta.addKeyListener(this);
         add(ta);
 
@@ -33,14 +32,11 @@ class MyFrame5 extends JFrame implements KeyListener{
     // 키를 눌렀다 뗐을 때의 동작을 정의
     @Override
     public void keyReleased(KeyEvent e) {
-
     }
 
     // 글자가 입력됐을 때의 동작을 정의
     @Override
     public void keyTyped(KeyEvent e) {
-        // TODO 자동 생성된 메소드 스텁
-
     }
 }
 
