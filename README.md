@@ -13,7 +13,7 @@
 - Domain
     - 게임 전체를 추상화하는 Sokovan 클래스
     
-            player 객체, 스테이지 객   
+            player 객체, 스테이지 객체
            
     - 캐릭터를 추상화하는 Player 클래스
        

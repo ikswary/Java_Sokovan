@@ -1,7 +1,7 @@
 package domain;
 
 public class Stage {
-	final char[][][] map = {
+	final static char[][][] map = {
 			{
 					{'#', '#', '#', '#', '#', '#', '#', '#'},
 					{'#', '#', 'P', ' ', '#', '#', '#', '#'},
@@ -33,7 +33,7 @@ public class Stage {
 					{'#', '#', '#', '#', '#', '#', '#', '#'}
 			}
 	};
-	final Integer[][] axis = {{1, 2}, {0, 0}, {0, 0}};
+	final static Integer[][] axis = {{1, 2}, {0, 0}, {0, 0}};
 }
 
 
