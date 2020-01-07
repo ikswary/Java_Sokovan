@@ -11,15 +11,16 @@
 
 ##구조
 - Domain
-
-        게임 전체를 추상화하는 Sokovan 클래스
-        캐릭터를 추상화하는 Player 클래스
+    - 게임 전체를 추상화하는 Sokovan 클래스
+    
+            player 객체, 스테이지 객   
+           
+    - 캐릭터를 추상화하는 Player 클래스
        
 - View
-        
-        awt, swing을 활용한 input View
-        console.flush() 메소드를 활용한 Output View
+    - awt, swing을 활용한 input View
+    - console.flush() 메소드를 활용한 Output View
      
-- Service
+- Controller
 
-        SokovanService 클래스를 메인 클래스에서 호출하여 게임 실행
+        SokovanController 클래스를 메인 클래스에서 호출하여 게임 실행
