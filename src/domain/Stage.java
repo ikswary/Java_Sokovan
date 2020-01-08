@@ -1,7 +1,7 @@
 package domain;
 
 public class Stage {
-	final static char[][][] map = {
+	final static Character[][][] map = {
 			{   //stage1의 맵
 					{'#', '#', '#', '#', '#', '#', '#', '#'},
 					{'#', '#', 'P', ' ', '#', '#', '#', '#'},

@@ -3,12 +3,12 @@ package domain;
 public class Sokovan {
 	private Player player;
 	private int stage = 1;
-	private char[][] map;
-	private Integer [][] clearAxis;
+	private Character[][] map;
+	private Integer[][] clearAxis;
 
 	public Sokovan() {
 		this.player = new Player();
-		this.map = new char[8][8];
+		this.map = new Character[8][8];
 		this.clearAxis = new Integer[3][2];
 	}
 
@@ -27,11 +27,69 @@ public class Sokovan {
 			System.out.println(map[i]);
 		}
 		/*
-		클리어 좌표 복사 확인 코드
+		클리어 좌표 복사 확인 코
 		for (int i = 0; i < this.clearAxis.length; i++) {
 			System.out.println(clearAxis[i][0].toString() + ", " + clearAxis[i][1].toString());
 		}
 
 		 */
 	}
+
+	private Boolean isAxisEmpty(Integer axisX, Integer axisY) {
+		if (map[axisX - 1][axisY].equals(' ') || map[axisX - 1][axisY].equals('*')) {
+			return true;
+		}
+		return false;
+	}
+
+	private Boolean isAxisBox(Integer axisX, Integer axisY) {
+		if (map[axisX - 1][axisY].equals('B')) {
+			return true;
+		}
+		return false;
+	}
+
+	public void movePlayer(Integer cursor) {
+		Integer axisX = player.getAxisX();
+		Integer axisY = player.getAxisY();
+
+		if (cursor == Cursor.UP) {
+			if (isAxisEmpty(axisX - 1, axisY)) {
+				// 위로 이동
+			} else if (isAxisBox(axisX - 1, axisY)) {
+				if (isAxisEmpty(axisX - 2, axisY)) {
+					// 위로 밀고 이동
+				}
+			}
+		} else if (cursor == Cursor.DOWN) {
+			if (isAxisEmpty(axisX - 1, axisY)) {
+				// 아래로 이동
+			} else if (isAxisBox(axisX + 1, axisY)) {
+				if (isAxisEmpty(axisX + 2, axisY)) {
+					// 아래로 밀고 이동
+				}
+			}
+		} else if (cursor == Cursor.LEFT) {
+			if (isAxisEmpty(axisX, axisY-1)) {
+				// 왼쪽으로 이동
+			} else if (isAxisBox(axisX, axisY - 1)) {
+				if (isAxisEmpty(axisX, axisY -2 )) {
+					// 왼쪽으로 밀고 이동
+				}
+			}
+		} else if (cursor == Cursor.RIGHT) {
+			if (isAxisEmpty(axisX, axisY + 1)) {
+				// 위로 이동
+			} else if (isAxisBox(axisX, axisY + 1)) {
+				if (isAxisEmpty(axisX, axisY + 2)) {
+					// 위로 밀고 이동
+				}
+			}
+		} else if (cursor == Cursor.BACK_SPACE) {
+			// 돌아가기
+		}
+
+
+	}
+
 }
