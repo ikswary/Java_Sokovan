@@ -27,7 +27,7 @@ public class input extends JFrame implements KeyListener {
 	// 키가 눌려진 상태일 때의 동작을 정의
 	@Override
 	public void keyPressed(KeyEvent e) {
-		int s = e.getKeyCode();
+		Integer s = e.getKeyCode();
 		System.out.println(s);
 	}
 

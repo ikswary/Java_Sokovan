@@ -27,9 +27,11 @@ public class Sokovan {
 			System.out.println(map[i]);
 		}
 		/*
+		클리어 좌표 복사 확인 코드
 		for (int i = 0; i < this.clearAxis.length; i++) {
 			System.out.println(clearAxis[i][0].toString() + ", " + clearAxis[i][1].toString());
 		}
+
 		 */
 	}
 }
