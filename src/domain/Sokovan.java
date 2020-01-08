@@ -1,5 +1,7 @@
 package domain;
 
+import view.output;
+
 public class Sokovan {
 	private Player player;
 	private int stage = 1;
@@ -13,8 +15,10 @@ public class Sokovan {
 	}
 
 	public void initStage(int stage) {
+		Character[][] map = this.map.getMap();
+
 		for (int i = 0; i < this.map.length(); i++) {
-			map.getMap()[i] = Stage.map[stage - 1][i].clone();
+			map[i] = Stage.map[stage - 1][i].clone();
 		}
 		for (int i = 0; i < this.clearAxis.length; i++) {
 			this.clearAxis[i] = Stage.clearAxis[stage - 1][i].clone();
@@ -23,9 +27,8 @@ public class Sokovan {
 	}
 
 	public void printMap() {
-		for (int i = 0; i < this.map.length(); i++) {
-			System.out.println(map.getMap()[i]);
-		}
+		Character[][] map = this.map.getMap();
+		output.printMap(map);
 		/*
 		클리어 좌표 복사 확인 코
 		for (int i = 0; i < this.clearAxis.length; i++) {
