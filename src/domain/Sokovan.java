@@ -3,18 +3,18 @@ package domain;
 public class Sokovan {
 	private Player player;
 	private int stage = 1;
-	private Character[][] map;
+	private Map map;
 	private Integer[][] clearAxis;
 
 	public Sokovan() {
 		this.player = new Player();
-		this.map = new Character[8][8];
+		this.map = new Map();
 		this.clearAxis = new Integer[3][2];
 	}
 
 	public void initStage(int stage) {
-		for (int i = 0; i < this.map.length; i++) {
-			this.map[i] = Stage.map[stage - 1][i].clone();
+		for (int i = 0; i < this.map.length(); i++) {
+			map.getMap()[i] = Stage.map[stage - 1][i].clone();
 		}
 		for (int i = 0; i < this.clearAxis.length; i++) {
 			this.clearAxis[i] = Stage.clearAxis[stage - 1][i].clone();
@@ -23,8 +23,8 @@ public class Sokovan {
 	}
 
 	public void printMap() {
-		for (int i = 0; i < this.map.length; i++) {
-			System.out.println(map[i]);
+		for (int i = 0; i < this.map.length(); i++) {
+			System.out.println(map.getMap()[i]);
 		}
 		/*
 		클리어 좌표 복사 확인 코
@@ -36,14 +36,14 @@ public class Sokovan {
 	}
 
 	private Boolean isAxisEmpty(Integer axisX, Integer axisY) {
-		if (map[axisX - 1][axisY].equals(' ') || map[axisX - 1][axisY].equals('*')) {
+		if (map.getMap()[axisX - 1][axisY].equals(' ') || map.getMap()[axisX - 1][axisY].equals('*')) {
 			return true;
 		}
 		return false;
 	}
 
 	private Boolean isAxisBox(Integer axisX, Integer axisY) {
-		if (map[axisX - 1][axisY].equals('B')) {
+		if (map.getMap()[axisX - 1][axisY].equals('B')) {
 			return true;
 		}
 		return false;
@@ -70,10 +70,10 @@ public class Sokovan {
 				}
 			}
 		} else if (cursor == Cursor.LEFT) {
-			if (isAxisEmpty(axisX, axisY-1)) {
+			if (isAxisEmpty(axisX, axisY - 1)) {
 				// 왼쪽으로 이동
 			} else if (isAxisBox(axisX, axisY - 1)) {
-				if (isAxisEmpty(axisX, axisY -2 )) {
+				if (isAxisEmpty(axisX, axisY - 2)) {
 					// 왼쪽으로 밀고 이동
 				}
 			}
@@ -88,8 +88,5 @@ public class Sokovan {
 		} else if (cursor == Cursor.BACK_SPACE) {
 			// 돌아가기
 		}
-
-
 	}
-
 }
