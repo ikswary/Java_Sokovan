@@ -1,9 +1,13 @@
 package view;
 
-import java.util.Arrays;
+import java.io.Console;
 
 public class Output {
 	public static void printMap(Character[][] map) {
+		for (int i = 0; i < 15; i++) {
+			System.out.println("");
+		}
+
 		for (int i = 0; i < map.length; i++) {
 			String mapString = "";
 
