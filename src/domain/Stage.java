@@ -37,7 +37,7 @@ public class Stage {
 	final static Integer[][] playerAxis = {{3, 2}, {0, 0}, {1, 2}};
 	final static Integer[][][] clearAxis = {
 			{
-					{3, 4}, {4, 5}, {5, 4} // Stage1의 클리어 좌표
+					{2, 4}, {3, 5}, {4, 4} // Stage1의 클리어 좌표
 			},
 			{
 					{4, 1}, {5, 1}, {6, 1}
