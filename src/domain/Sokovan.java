@@ -1,6 +1,6 @@
 package domain;
 
-import view.output;
+import view.Output;
 
 public class Sokovan {
 	private Player player;
@@ -13,13 +13,13 @@ public class Sokovan {
 		this.map = new Map();
 	}
 
-	public void initStage(int stage) {
-		map.setMap(stage);
+	public void initStage() {
+		map.setMap(this.stage);
 		this.player.setAxis(Stage.playerAxis[stage - 1]);
 	}
 
 	public void printMap() {
-		output.printMap(this.map.getMap());
+		Output.printMap(this.map.getMap());
 		/*
 		클리어 좌표 복사 확인 코드
 		for (int i = 0; i < this.clearAxis.length; i++) {
@@ -40,41 +40,50 @@ public class Sokovan {
 	public void movePlayer(Integer cursor) {
 		Integer axisX = player.getAxisX();
 		Integer axisY = player.getAxisY();
+		final Integer AXIS_UP = axisX - 1;
+		final Integer AXIS_DOWN = axisX + 1;
+		final Integer AXIS_LEFT = axisY - 1;
+		final Integer AXIS_RIGHT = axisY + 1;
 
 		if (cursor == Cursor.UP) {
-			if (isAxisEmpty(axisX - 1, axisY)) {
-				// 위로 이동
-			} else if (isAxisBox(axisX - 1, axisY)) {
-				if (isAxisEmpty(axisX - 2, axisY)) {
+			if (isAxisEmpty(AXIS_UP, axisY)) {
+				player.setAxis(new Integer[]{AXIS_UP, axisY});
+				map.moveByIndex(axisX, axisY, AXIS_UP, axisY);
+			} else if (isAxisBox(AXIS_UP, axisY)) {
+				if (isAxisEmpty(AXIS_UP - 1, axisY)) {
 					// 위로 밀고 이동
 				}
 			}
 		} else if (cursor == Cursor.DOWN) {
-			if (isAxisEmpty(axisX - 1, axisY)) {
-				// 아래로 이동
-			} else if (isAxisBox(axisX + 1, axisY)) {
-				if (isAxisEmpty(axisX + 2, axisY)) {
+			if (isAxisEmpty(AXIS_DOWN, axisY)) {
+				player.setAxis(new Integer[]{AXIS_DOWN, axisY});
+				map.moveByIndex(axisX, axisY, AXIS_DOWN, axisY);
+			} else if (isAxisBox(AXIS_DOWN, axisY)) {
+				if (isAxisEmpty(AXIS_DOWN + 1, axisY)) {
 					// 아래로 밀고 이동
 				}
 			}
 		} else if (cursor == Cursor.LEFT) {
-			if (isAxisEmpty(axisX, axisY - 1)) {
-				// 왼쪽으로 이동
-			} else if (isAxisBox(axisX, axisY - 1)) {
-				if (isAxisEmpty(axisX, axisY - 2)) {
+			if (isAxisEmpty(axisX, AXIS_LEFT)) {
+				player.setAxis(new Integer[]{axisX, AXIS_LEFT});
+				map.moveByIndex(axisX, axisY, axisX, AXIS_LEFT);
+			} else if (isAxisBox(axisX, AXIS_LEFT)) {
+				if (isAxisEmpty(axisX, AXIS_LEFT - 1)) {
 					// 왼쪽으로 밀고 이동
 				}
 			}
 		} else if (cursor == Cursor.RIGHT) {
-			if (isAxisEmpty(axisX, axisY + 1)) {
-				// 위로 이동
-			} else if (isAxisBox(axisX, axisY + 1)) {
-				if (isAxisEmpty(axisX, axisY + 2)) {
+			if (isAxisEmpty(axisX, AXIS_RIGHT)) {
+				player.setAxis(new Integer[]{axisX, AXIS_RIGHT});
+				map.moveByIndex(axisX, axisY, axisX, AXIS_RIGHT);
+			} else if (isAxisBox(axisX, AXIS_RIGHT)) {
+				if (isAxisEmpty(axisX, AXIS_RIGHT + 1)) {
 					// 위로 밀고 이동
 				}
 			}
 		} else if (cursor == Cursor.BACK_SPACE) {
 			// 돌아가기
 		}
+		printMap();
 	}
 }

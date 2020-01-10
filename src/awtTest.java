@@ -12,6 +12,10 @@ import javax.swing.JTextArea;
 public class awtTest extends JFrame implements KeyListener {
     JTextArea ta = new JTextArea();
 
+    public static void main(String[] args) {
+    awtTest awt = new awtTest();
+    }
+
     public awtTest() {
         ta.addKeyListener(this);
         add(ta);

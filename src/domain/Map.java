@@ -18,10 +18,6 @@ public class Map {
 		}
 	}
 
-	public Integer length() {
-		return this.map.length;
-	}
-
 	public Character[][] getMap() {
 		return map;
 	}

@@ -2,7 +2,7 @@ package view;
 
 import java.util.Arrays;
 
-public class output {
+public class Output {
 	public static void printMap(Character[][] map) {
 		for (int i = 0; i < map.length; i++) {
 			String mapString = "";
