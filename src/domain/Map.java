@@ -20,9 +20,6 @@ public class Map {
 		for (int i = 0; i < this.clearAxis.length; i++) {
 			this.clearAxis[i] = Stage.clearAxis[stage - 1][i].clone();
 		}
-		System.out.println(clearAxis[0][0] + ", " + clearAxis[0][1]);
-		System.out.println(clearAxis[1][0] + ", " + clearAxis[1][1]);
-		System.out.println(clearAxis[2][0] + ", " + clearAxis[2][1]);
 	}
 
 	public Character[][] getMap() {
@@ -58,7 +55,6 @@ public class Map {
 				result = false;
 			}
 		}
-		System.out.println("stage clear " + result);
 		return result;
 
 	}

@@ -25,13 +25,6 @@ public class Sokovan {
 
 	public void printMap() {
 		Output.printMap(this.map.getMap());
-		/*
-		클리어 좌표 복사 확인 코드
-		for (int i = 0; i < this.clearAxis.length; i++) {
-			System.out.println(clearAxis[i][0].toString() + ", " + clearAxis[i][1].toString());
-		}
-
-		 */
 	}
 
 	private Boolean isAxisEmpty(Integer axisX, Integer axisY) {
@@ -112,9 +105,16 @@ public class Sokovan {
 		} else if (cursor == Cursor.BACK_SPACE) {
 			loadSnapShot();
 		}
+
 		if (map.isStageClear()) {
 			this.stage++;
-			initStage();
+			try {
+				initStage();
+			} catch (ArrayIndexOutOfBoundsException e) {
+				printMap();
+				System.out.println("게임 종료");
+				System.exit(0);
+			}
 		}
 		printMap();
 	}
