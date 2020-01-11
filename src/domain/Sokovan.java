@@ -2,15 +2,20 @@ package domain;
 
 import view.Output;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Sokovan {
 	private Player player;
 	private int stage = 1;
 	private Map map;
+	private List<SnapShot> SnapShots = new ArrayList<SnapShot>();
 
 
 	public Sokovan() {
 		this.player = new Player();
 		this.map = new Map();
+		initStage();
 	}
 
 	public void initStage() {
@@ -38,9 +43,9 @@ public class Sokovan {
 		return map.getMap()[axisX][axisY].equals('B');
 	}
 
-	private void performMove(Integer currentAxisX, Integer curruntAxisY
+	private void performMove(Integer currentAxisX, Integer currentAxisY
 			, Integer postAxisX, Integer postAxisY) {
-		map.moveByIndex(currentAxisX, curruntAxisY, postAxisX, postAxisY);
+		map.moveByIndex(currentAxisX, currentAxisY, postAxisX, postAxisY);
 		player.setAxis(new Integer[]{postAxisX, postAxisY});
 	}
 
@@ -56,6 +61,7 @@ public class Sokovan {
 		final Integer AXIS_LEFTX2 = axisY - 2;
 		final Integer AXIS_RIGHTX2 = axisY + 2;
 
+		takeSnapShot();
 		if (cursor == Cursor.UP) {
 			if (isAxisEmpty(AXIS_UP, axisY)) {
 				performMove(axisX, axisY, AXIS_UP, axisY);
@@ -96,7 +102,7 @@ public class Sokovan {
 				}
 			}
 		} else if (cursor == Cursor.BACK_SPACE) {
-			// 돌아가기
+			loadSnapShot();
 		}
 
 		System.out.println(player.getAxisX() + ", " + player.getAxisY());
@@ -105,5 +111,17 @@ public class Sokovan {
 			initStage();
 		}
 		printMap();
+	}
+
+	public void takeSnapShot() {
+		if(SnapShots.size() < 3) {
+			SnapShots.add(new SnapShot(player.cloneAxis(), map.cloneMap()));
+		}
+	}
+
+	public void loadSnapShot() {
+		SnapShot snapShot = SnapShots.remove(SnapShots.size());
+		player.setAxis(snapShot.getPlayerAxis());
+		map.setMap(snapShot.getMap());
 	}
 }

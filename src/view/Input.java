@@ -17,8 +17,8 @@ public class Input extends JFrame implements KeyListener {
 	JTextArea ta = new JTextArea();
 	Sokovan sokovan = new Sokovan();
 
+
 	public Input() {
-		sokovan.initStage();
 		sokovan.printMap();
 		ta.addKeyListener(this);
 		add(ta);

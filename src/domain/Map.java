@@ -9,6 +9,10 @@ public class Map {
 		this.clearAxis = new Integer[3][2];
 	}
 
+	public void setMap(Character[][] cloneMap) {
+		this.map = cloneMap;
+	}
+
 	public void setMap(Integer stage) {
 		for (int i = 0; i < this.map.length; i++) {
 			map[i] = Stage.map[stage - 1][i].clone();
@@ -38,7 +42,6 @@ public class Map {
 
 	public void moveByIndex(Integer currentAxisX, Integer currentAxisY
 			, Integer postAxisX, Integer postAxisY) {
-		//Character tmp = map[postAxisX][postAxisY];
 		map[postAxisX][postAxisY] = map[currentAxisX][currentAxisY];
 		map[currentAxisX][currentAxisY] = ' ';
 
@@ -58,5 +61,13 @@ public class Map {
 		System.out.println("stage clear " + result);
 		return result;
 
+	}
+
+	public Character[][] cloneMap() {
+		Character[][] result = new Character[8][8];
+		for (int i = 0; i < map.length; i++) {
+			result[i] = map[i].clone();
+		}
+		return result;
 	}
 }
