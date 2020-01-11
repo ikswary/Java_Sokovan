@@ -26,10 +26,10 @@ public class Map {
 	}
 
 	private Boolean isInClearAxis(Integer axisX, Integer axisY) {
-		for (int i = 0; i < clearAxis.length; i++) {
-			if (clearAxis[i][0] == axisX && clearAxis[i][1] == axisY) {
-				System.out.println(clearAxis[i][0] + " == " + axisX + " ?");
-				System.out.println(clearAxis[i][1] + " == " + axisY + " ?");
+		for (Integer[] clearCoordnate : clearAxis) {
+			if (clearCoordnate[0] == axisX && clearCoordnate[1] == axisY) {
+				System.out.println(clearCoordnate[0] + " == " + axisX + " ?");
+				System.out.println(clearCoordnate[1] + " == " + axisY + " ?");
 				return true;
 			}
 		}
@@ -45,5 +45,18 @@ public class Map {
 		if (isInClearAxis(currentAxisX, currentAxisY)) {
 			map[currentAxisX][currentAxisY] = '*';
 		}
+	}
+
+	public Boolean isStageClear() {
+		Boolean result = true;
+
+		for (Integer[] clearCoordnate : clearAxis) {
+			if (!map[clearCoordnate[0]][clearCoordnate[1]].equals('B')) {
+				result = false;
+			}
+		}
+		System.out.println("stage clear " + result);
+		return result;
+
 	}
 }

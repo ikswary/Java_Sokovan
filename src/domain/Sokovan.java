@@ -99,5 +99,9 @@ public class Sokovan {
 		}
 		printMap();
 		System.out.println(player.getAxisX() + ", " + player.getAxisY());
+		if (map.isStageClear()) {
+			this.stage++;
+			initStage();
+		}
 	}
 }
