@@ -61,21 +61,25 @@ public class Sokovan {
 		final Integer AXIS_LEFTX2 = axisY - 2;
 		final Integer AXIS_RIGHTX2 = axisY + 2;
 
-		takeSnapShot();
+
 		if (cursor == Cursor.UP) {
 			if (isAxisEmpty(AXIS_UP, axisY)) {
+				takeSnapShot();
 				performMove(axisX, axisY, AXIS_UP, axisY);
 			} else if (isAxisBox(AXIS_UP, axisY)) {
 				if (isAxisEmpty(AXIS_UPX2, axisY)) {
+					takeSnapShot();
 					map.moveByIndex(AXIS_UP, axisY, AXIS_UPX2, axisY);
 					performMove(axisX, axisY, AXIS_UP, axisY);
 				}
 			}
 		} else if (cursor == Cursor.DOWN) {
 			if (isAxisEmpty(AXIS_DOWN, axisY)) {
+				takeSnapShot();
 				performMove(axisX, axisY, AXIS_DOWN, axisY);
 			} else if (isAxisBox(AXIS_DOWN, axisY)) {
 				if (isAxisEmpty(AXIS_DOWNX2, axisY)) {
+					takeSnapShot();
 					map.moveByIndex(AXIS_DOWN, axisY, AXIS_DOWNX2, axisY);
 					performMove(axisX, axisY, AXIS_DOWN, axisY);
 					// 아래로 밀고 이동
@@ -83,9 +87,11 @@ public class Sokovan {
 			}
 		} else if (cursor == Cursor.LEFT) {
 			if (isAxisEmpty(axisX, AXIS_LEFT)) {
+				takeSnapShot();
 				performMove(axisX, axisY, axisX, AXIS_LEFT);
 			} else if (isAxisBox(axisX, AXIS_LEFT)) {
 				if (isAxisEmpty(axisX, AXIS_LEFTX2)) {
+					takeSnapShot();
 					map.moveByIndex(axisX, AXIS_LEFT, axisX, AXIS_LEFTX2);
 					performMove(axisX, axisY, axisX, AXIS_LEFT);
 					// 왼쪽으로 밀고 이동
@@ -93,9 +99,11 @@ public class Sokovan {
 			}
 		} else if (cursor == Cursor.RIGHT) {
 			if (isAxisEmpty(axisX, AXIS_RIGHT)) {
+				takeSnapShot();
 				performMove(axisX, axisY, axisX, AXIS_RIGHT);
 			} else if (isAxisBox(axisX, AXIS_RIGHT)) {
 				if (isAxisEmpty(axisX, AXIS_RIGHTX2)) {
+					takeSnapShot();
 					map.moveByIndex(axisX, AXIS_RIGHT, axisX, AXIS_RIGHTX2);
 					performMove(axisX, axisY, axisX, AXIS_RIGHT);
 					// 위로 밀고 이동
@@ -104,8 +112,6 @@ public class Sokovan {
 		} else if (cursor == Cursor.BACK_SPACE) {
 			loadSnapShot();
 		}
-
-		System.out.println(player.getAxisX() + ", " + player.getAxisY());
 		if (map.isStageClear()) {
 			this.stage++;
 			initStage();
@@ -114,14 +120,19 @@ public class Sokovan {
 	}
 
 	public void takeSnapShot() {
-		if(SnapShots.size() < 3) {
-			SnapShots.add(new SnapShot(player.cloneAxis(), map.cloneMap()));
+		if (SnapShots.size() > 2) {
+			SnapShots.remove(0);
 		}
+		SnapShots.add(new SnapShot(player.cloneAxis(), map.cloneMap()));
 	}
 
 	public void loadSnapShot() {
-		SnapShot snapShot = SnapShots.remove(SnapShots.size());
-		player.setAxis(snapShot.getPlayerAxis());
-		map.setMap(snapShot.getMap());
+		try {
+			SnapShot snapShot = SnapShots.remove(SnapShots.size() - 1);
+			player.setAxis(snapShot.getPlayerAxis());
+			map.setMap(snapShot.getMap());
+		} catch (ArrayIndexOutOfBoundsException e) {
+		}
+
 	}
 }
