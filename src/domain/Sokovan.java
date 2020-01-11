@@ -30,7 +30,8 @@ public class Sokovan {
 	}
 
 	private Boolean isAxisEmpty(Integer axisX, Integer axisY) {
-		return map.getMap()[axisX][axisY].equals(' ') || map.getMap()[axisX][axisY].equals('*');
+		return map.getMap()[axisX][axisY].equals(' ')
+				|| map.getMap()[axisX][axisY].equals('*');
 	}
 
 	private Boolean isAxisBox(Integer axisX, Integer axisY) {
@@ -97,11 +98,12 @@ public class Sokovan {
 		} else if (cursor == Cursor.BACK_SPACE) {
 			// 돌아가기
 		}
-		printMap();
+
 		System.out.println(player.getAxisX() + ", " + player.getAxisY());
 		if (map.isStageClear()) {
 			this.stage++;
 			initStage();
 		}
+		printMap();
 	}
 }
