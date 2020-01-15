@@ -1,5 +1,7 @@
-package domain;
+package controller;
 
+import domain.*;
+import view.ArrowInput;
 import view.Output;
 
 import java.util.ArrayList;
@@ -10,21 +12,20 @@ public class Sokovan {
 	private int stage = 1;
 	private Map map;
 	private List<SnapShot> SnapShots = new ArrayList<SnapShot>();
+	private ArrowInput arrowInput;
 
 
 	public Sokovan() {
 		this.player = new Player();
 		this.map = new Map();
+		this.arrowInput = new ArrowInput(this);
 		initStage();
 	}
 
 	public void initStage() {
 		map.setMap(this.stage);
-		this.player.setAxis(Stage.playerAxis[stage - 1]);
-	}
-
-	public void printMap() {
-		Output.printMap(this.map.getMap());
+		this.player.setAxis(MapDB.playerAxis[stage - 1]);
+		map.printMap();
 	}
 
 	private Boolean isAxisEmpty(Integer axisX, Integer axisY) {
@@ -111,12 +112,12 @@ public class Sokovan {
 			try {
 				initStage();
 			} catch (ArrayIndexOutOfBoundsException e) {
-				printMap();
+				map.printMap();
 				System.out.println("게임 종료");
 				System.exit(0);
 			}
 		}
-		printMap();
+		map.printMap();
 	}
 
 	public void takeSnapShot() {
