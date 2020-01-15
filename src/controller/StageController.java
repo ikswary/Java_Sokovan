@@ -2,12 +2,11 @@ package controller;
 
 import domain.*;
 import view.ArrowInput;
-import view.Output;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sokovan {
+public class StageController {
 	private Player player;
 	private int stage = 1;
 	private Map map;
@@ -15,7 +14,7 @@ public class Sokovan {
 	private ArrowInput arrowInput;
 
 
-	public Sokovan() {
+	public StageController() {
 		this.player = new Player();
 		this.map = new Map();
 		this.arrowInput = new ArrowInput(this);

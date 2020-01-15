@@ -1,6 +1,6 @@
 package view;
 
-import domain.Sokovan;
+import controller.StageController;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -13,13 +13,13 @@ import javax.swing.JTextArea;
 // MouseEvent 처리	-> MouseListenera
 
 // 키 입력 이벤트 처리 인터페이스 KeyListener 구현
-public class Input extends JFrame implements KeyListener {
-	JTextArea ta = new JTextArea();
-	Sokovan sokovan = new Sokovan();
+public class ArrowInput extends JFrame implements KeyListener {
+	private JTextArea ta = new JTextArea();
+	private StageController stageController;
 
 
-	public Input() {
-		sokovan.printMap();
+	public ArrowInput(StageController stageController) {
+		this.stageController = stageController;
 		ta.addKeyListener(this);
 		add(ta);
 		setSize(500, 500);
@@ -32,7 +32,7 @@ public class Input extends JFrame implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		Integer cursor = e.getKeyCode();
-		sokovan.movePlayer(cursor);
+		stageController.movePlayer(cursor);
 	}
 
 	// 키를 눌렀다 뗐을 때의 동작을 정의
