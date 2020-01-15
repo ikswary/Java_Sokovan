@@ -15,10 +15,10 @@ public class Map {
 
 	public void setMap(Integer stage) {
 		for (int i = 0; i < this.map.length; i++) {
-			map[i] = Stage.map[stage - 1][i].clone();
+			map[i] = MapDB.map[stage - 1][i].clone();
 		}
 		for (int i = 0; i < this.clearAxis.length; i++) {
-			this.clearAxis[i] = Stage.clearAxis[stage - 1][i].clone();
+			this.clearAxis[i] = MapDB.clearAxis[stage - 1][i].clone();
 		}
 	}
 

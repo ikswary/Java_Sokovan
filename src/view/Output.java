@@ -1,12 +1,13 @@
 package view;
 
-import java.io.Console;
-
 public class Output {
 	public static void printMap(Character[][] map) {
-		for (int i = 0; i < 15; i++) {
-			System.out.println("");
+		String space = "\n";
+
+		for (int i = 0; i < 10; i++) {
+			space += "\n";
 		}
+		System.out.println(space);
 
 		for (int i = 0; i < map.length; i++) {
 			String mapString = "";
