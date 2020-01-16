@@ -1,8 +1,8 @@
-import controller.StageController;
+import service.StageManager;
 
 public class SokovanApplication {
     public static void main(String[] args) {
-        StageController stageController = new StageController();
+        StageManager stageManager = new StageManager();
     }
 
 }

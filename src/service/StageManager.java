@@ -1,4 +1,4 @@
-package controller;
+package service;
 
 import domain.*;
 import view.ArrowInput;
@@ -6,23 +6,20 @@ import view.ArrowInput;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StageController {
+public class StageManager {
 	private Player player;
-	private int stage = 1;
 	private Map map;
-	private List<SnapShot> snapShots = new ArrayList<SnapShot>();
-	private ArrowInput arrowInput;
+	private List<SnapShot> snapShots;
 
 
-	public StageController() {
+	public StageManager() {
 		this.player = new Player();
 		this.map = new Map();
-		this.arrowInput = new ArrowInput(this);
-		initStage();
+        this.snapShots = new ArrayList<SnapShot>();
 	}
 
-	public void initStage() {
-		map.setMap(this.stage);
+	public void initStage(Integer stage) {
+		map.setMap(stage);
 		this.player.setAxis(MapDB.playerAxis[stage - 1]);
 		map.printMap();
 	}
@@ -42,7 +39,7 @@ public class StageController {
 		player.setAxis(new Integer[]{postAxisX, postAxisY});
 	}
 
-	public void movePlayer(Integer cursor) {
+	public void movePlayer(Cursor cursor) {
 		Integer axisX = player.getAxisX();
 		Integer axisY = player.getAxisY();
 		final Integer AXIS_UP = axisX - 1;
@@ -55,7 +52,7 @@ public class StageController {
 		final Integer AXIS_RIGHTX2 = axisY + 2;
 
 
-		if (cursor == Cursor.UP) {
+		if (cursor.equals(Cursor.UP)) {
 			if (isAxisEmpty(AXIS_UP, axisY)) {
 				takeSnapShot();
 				performMove(axisX, axisY, AXIS_UP, axisY);
@@ -66,7 +63,7 @@ public class StageController {
 					performMove(axisX, axisY, AXIS_UP, axisY);
 				}
 			}
-		} else if (cursor == Cursor.DOWN) {
+		} else if (cursor.equals(Cursor.DOWN)) {
 			if (isAxisEmpty(AXIS_DOWN, axisY)) {
 				takeSnapShot();
 				performMove(axisX, axisY, AXIS_DOWN, axisY);
@@ -78,7 +75,7 @@ public class StageController {
 					// 아래로 밀고 이동
 				}
 			}
-		} else if (cursor == Cursor.LEFT) {
+		} else if (cursor.equals(Cursor.LEFT)) {
 			if (isAxisEmpty(axisX, AXIS_LEFT)) {
 				takeSnapShot();
 				performMove(axisX, axisY, axisX, AXIS_LEFT);
@@ -90,7 +87,7 @@ public class StageController {
 					// 왼쪽으로 밀고 이동
 				}
 			}
-		} else if (cursor == Cursor.RIGHT) {
+		} else if (cursor.equals(Cursor.RIGHT)) {
 			if (isAxisEmpty(axisX, AXIS_RIGHT)) {
 				takeSnapShot();
 				performMove(axisX, axisY, axisX, AXIS_RIGHT);
@@ -102,7 +99,7 @@ public class StageController {
 					// 위로 밀고 이동
 				}
 			}
-		} else if (cursor == Cursor.BACK_SPACE) {
+		} else if (cursor.equals(Cursor.BACK_SPACE)) {
 			loadSnapShot();
 		}
 
@@ -110,14 +107,7 @@ public class StageController {
 			for (int i = 0; i < 3; i++) {
 				this.snapShots.remove(0);
 			}
-			this.stage++;
-			try {
-				initStage();
-			} catch (ArrayIndexOutOfBoundsException e) {
-				map.printMap();
-				System.out.println("게임 종료");
-				System.exit(0);
-			}
+
 		}
 		map.printMap();
 	}
