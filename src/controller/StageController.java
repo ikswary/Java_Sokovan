@@ -10,7 +10,7 @@ public class StageController {
 	private Player player;
 	private int stage = 1;
 	private Map map;
-	private List<SnapShot> SnapShots = new ArrayList<SnapShot>();
+	private List<SnapShot> snapShots = new ArrayList<SnapShot>();
 	private ArrowInput arrowInput;
 
 
@@ -107,6 +107,9 @@ public class StageController {
 		}
 
 		if (map.isStageClear()) {
+			for (int i = 0; i < 3; i++) {
+				this.snapShots.remove(0);
+			}
 			this.stage++;
 			try {
 				initStage();
@@ -120,15 +123,15 @@ public class StageController {
 	}
 
 	public void takeSnapShot() {
-		if (SnapShots.size() > 2) {
-			SnapShots.remove(0);
+		if (snapShots.size() > 2) {
+			snapShots.remove(0);
 		}
-		SnapShots.add(new SnapShot(player.cloneAxis(), map.cloneMap()));
+		snapShots.add(new SnapShot(player.cloneAxis(), map.cloneMap()));
 	}
 
 	public void loadSnapShot() {
 		try {
-			SnapShot snapShot = SnapShots.remove(SnapShots.size() - 1);
+			SnapShot snapShot = snapShots.remove(snapShots.size() - 1);
 			player.setAxis(snapShot.getPlayerAxis());
 			map.setMap(snapShot.getMap());
 		} catch (ArrayIndexOutOfBoundsException e) {
