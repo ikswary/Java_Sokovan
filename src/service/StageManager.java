@@ -1,7 +1,6 @@
 package service;
 
 import domain.*;
-import view.ArrowInput;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +14,12 @@ public class StageManager {
 	public StageManager() {
 		this.player = new Player();
 		this.map = new Map();
-        this.snapShots = new ArrayList<SnapShot>();
+        this.snapShots = new ArrayList<>();
 	}
 
 	public void initStage(Integer stage) {
 		map.setMap(stage);
-		this.player.setAxis(MapDB.playerAxis[stage - 1]);
+		this.player.setAxis(MapDB.playerAxis[stage]);
 		map.printMap();
 	}
 
@@ -39,7 +38,7 @@ public class StageManager {
 		player.setAxis(new Integer[]{postAxisX, postAxisY});
 	}
 
-	public void movePlayer(Cursor cursor) {
+	public Boolean movePlayer(Cursor cursor) {
 		Integer axisX = player.getAxisX();
 		Integer axisY = player.getAxisY();
 		final Integer AXIS_UP = axisX - 1;
@@ -50,7 +49,6 @@ public class StageManager {
 		final Integer AXIS_DOWNX2 = axisX + 2;
 		final Integer AXIS_LEFTX2 = axisY - 2;
 		final Integer AXIS_RIGHTX2 = axisY + 2;
-
 
 		if (cursor.equals(Cursor.UP)) {
 			if (isAxisEmpty(AXIS_UP, axisY)) {
@@ -107,9 +105,10 @@ public class StageManager {
 			for (int i = 0; i < 3; i++) {
 				this.snapShots.remove(0);
 			}
-
+			return true;
 		}
 		map.printMap();
+		return false;
 	}
 
 	public void takeSnapShot() {

@@ -4,9 +4,8 @@ public enum Cursor {
 	UP(38),
 	DOWN(40),
 	LEFT(37),
-	RIGHT(38),
-	BACK_SPACE(8),
-	WRONG_INPUT(0);
+	RIGHT(39),
+	BACK_SPACE(8);
 
 	private Integer cursorInteger;
 

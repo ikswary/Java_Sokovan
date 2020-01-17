@@ -1,8 +1,9 @@
-import service.StageManager;
+import controller.SokovanMaster;
 
 public class SokovanApplication {
     public static void main(String[] args) {
-        StageManager stageManager = new StageManager();
+        SokovanMaster sokovanMaster = new SokovanMaster();
+        sokovanMaster.startSokovan();
     }
 
 }
