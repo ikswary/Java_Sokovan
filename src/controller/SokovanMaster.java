@@ -5,6 +5,8 @@ import domain.MapDB;
 import service.StageManager;
 import utils.utility;
 import view.ArrowInput;
+import view.ConsoleInput;
+import view.ConsoleOutput;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,19 +25,20 @@ public class SokovanMaster {
     public void movePlayerWithInteger(Integer cursor) {
         Boolean stageClear = false;
 
-        if (cursor == Cursor.UP.getCursorInteger()) {
+        if (cursor.equals(Cursor.UP.getCursorInteger())) {
             stageClear = stageManager.movePlayer(Cursor.UP);
-        } else if (cursor == Cursor.DOWN.getCursorInteger()) {
+        } else if (cursor.equals(Cursor.DOWN.getCursorInteger())) {
             stageClear = stageManager.movePlayer(Cursor.DOWN);
-        } else if (cursor == Cursor.LEFT.getCursorInteger()) {
+        } else if (cursor.equals(Cursor.LEFT.getCursorInteger())) {
             stageClear = stageManager.movePlayer(Cursor.LEFT);
-        } else if (cursor == Cursor.RIGHT.getCursorInteger()) {
+        } else if (cursor.equals(Cursor.RIGHT.getCursorInteger())) {
             stageClear = stageManager.movePlayer(Cursor.RIGHT);
-        } else if (cursor == Cursor.BACK_SPACE.getCursorInteger()) {
+        } else if (cursor.equals(Cursor.BACK_SPACE.getCursorInteger())) {
             stageClear = stageManager.movePlayer(Cursor.BACK_SPACE);
         }
         if (stageClear.equals(true)) {
             try {
+                ConsoleOutput.printChangingStage();
                 stageManager.initStage(stageOrder.remove(0));
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Game Clear");
@@ -52,8 +55,21 @@ public class SokovanMaster {
     }
 
     public void startSokovan() {
-        setRandomStageOrder(MapDB.map.length);
-        stageManager.initStage(stageOrder.remove(0)); // 첫번째 스테이지 로딩
-        this.arrowInput = new ArrowInput(this);
+        Integer selectedMenu = selectMenu();
+
+        if (selectedMenu == 1) {
+            setRandomStageOrder(MapDB.map.length);
+            stageManager.initStage(stageOrder.remove(0)); // 첫번째 스테이지 로딩
+            this.arrowInput = new ArrowInput(this);
+        } else if (selectedMenu == 2) {
+            System.out.println("Sokovan을 종료합니다");
+            System.exit(0);
+        }
+
+    }
+
+    private Integer selectMenu() {
+        ConsoleOutput.printGameMenu();
+        return ConsoleInput.getIntFromConsole();
     }
 }
