@@ -24,7 +24,6 @@ public class StageManager {
         this.currentStage++;
         map.setMap(mapNumber);
         this.player.setAxis(MapDB.playerAxis[mapNumber]);
-		ConsoleOutput.printChangingStage();
         printGameScreen();
     }
 
@@ -41,7 +40,7 @@ public class StageManager {
             , Integer postAxisX, Integer postAxisY) {
         map.moveByIndex(currentAxisX, currentAxisY, postAxisX, postAxisY);
         player.setAxis(new Integer[]{postAxisX, postAxisY});
-		this.player.movedOnce();
+        this.player.movedOnce();
     }
 
     public Boolean movePlayer(Cursor cursor) {
@@ -104,7 +103,6 @@ public class StageManager {
                 }
             }
         } else if (cursor.equals(Cursor.BACK_SPACE)) {
-            this.player.movedBackward();
             loadSnapShot();
         }
 
@@ -130,13 +128,14 @@ public class StageManager {
             SnapShot snapShot = snapShots.remove(snapShots.size() - 1);
             player.setAxis(snapShot.getPlayerAxis());
             map.setMap(snapShot.getMap());
+            this.player.movedBackward();
         } catch (ArrayIndexOutOfBoundsException e) {
         }
 
     }
 
     public void printGameScreen() {
-		System.out.println("\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n");
         System.out.println("┌──────────┐");
         System.out.println(" Stage : " + this.currentStage);
         System.out.println("  Map  : " + this.map.getMapNumber());
