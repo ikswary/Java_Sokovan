@@ -3,6 +3,7 @@ package domain;
 public class Map {
 	private Character[][] map;
 	private Integer[][] clearAxis;
+	private Integer mapNumber = 0;
 
 	public Map() {
 		this.map = new Character[8][8];
@@ -14,6 +15,7 @@ public class Map {
 	}
 
 	public void setMap(Integer stage) {
+		this.mapNumber = stage + 1;
 		for (int i = 0; i < this.map.length; i++) {
 			map[i] = MapDB.map[stage][i].clone();
 		}
@@ -28,8 +30,7 @@ public class Map {
 
 	public void printMap() {
 		for (int i = 0; i < map.length; i++) {
-			String mapString = "";
-
+			String mapString = "  ";
 			for (int j =0 ; j < map[i].length; j++) {
 				mapString += map[i][j];
 			}
@@ -76,5 +77,9 @@ public class Map {
 			result[i] = map[i].clone();
 		}
 		return result;
+	}
+
+	public Integer getMapNumber() {
+		return mapNumber;
 	}
 }

@@ -9,18 +9,21 @@ public class StageManager {
 	private Player player;
 	private Map map;
 	private List<SnapShot> snapShots;
+	private Integer currentStage;
 
 
 	public StageManager() {
 		this.player = new Player();
 		this.map = new Map();
         this.snapShots = new ArrayList<>();
+        this.currentStage = 0;
 	}
 
-	public void initStage(Integer stage) {
-		map.setMap(stage);
-		this.player.setAxis(MapDB.playerAxis[stage]);
-		map.printMap();
+	public void initStage(Integer mapNumber) {
+		this.currentStage++;
+		map.setMap(mapNumber);
+		this.player.setAxis(MapDB.playerAxis[mapNumber]);
+		printGameScreen();
 	}
 
 	private Boolean isAxisEmpty(Integer axisX, Integer axisY) {
@@ -98,6 +101,7 @@ public class StageManager {
 				}
 			}
 		} else if (cursor.equals(Cursor.BACK_SPACE)) {
+			this.player.movedBackward();
 			loadSnapShot();
 		}
 
@@ -107,7 +111,8 @@ public class StageManager {
 			}
 			return true;
 		}
-		map.printMap();
+		this.player.movedOnce();
+		printGameScreen();
 		return false;
 	}
 
@@ -126,5 +131,14 @@ public class StageManager {
 		} catch (ArrayIndexOutOfBoundsException e) {
 		}
 
+	}
+
+	public void printGameScreen() {
+		System.out.println("┌──────────┐");
+		System.out.println(" Stage : " + this.currentStage);
+		System.out.println("  Map  : " + this.map.getMapNumber());
+		System.out.println("  Move : " + this.player.getNumberOfMove());
+		System.out.println("└──────────┘");
+		map.printMap();
 	}
 }

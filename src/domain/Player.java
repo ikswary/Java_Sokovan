@@ -1,9 +1,12 @@
 package domain;
 
 public class Player {
-	private Integer[] axis = new Integer[2];
+	private Integer[] axis;
+	private Integer numberOfMove;
 
 	public Player() {
+		this.axis = new Integer[2];
+		this.numberOfMove = 0;
 	}
 
 	public Integer getAxisX() {
@@ -20,5 +23,17 @@ public class Player {
 
 	public Integer[] cloneAxis() {
 		return axis.clone();
+	}
+
+	public void movedOnce() {
+		this.numberOfMove++;
+	}
+
+	public void movedBackward() {
+		this.numberOfMove--;
+	}
+
+	public Integer getNumberOfMove() {
+		return this.numberOfMove;
 	}
 }
