@@ -16,7 +16,6 @@ public class SokovanMaster {
     private StageManager stageManager;
     private List<Integer> stageOrder;
     private ArrowInput arrowInput;
-    private Boolean sleeping = false;
 
     public SokovanMaster() {
         this.stageManager = new StageManager();
@@ -25,26 +24,25 @@ public class SokovanMaster {
 
     public void movePlayerWithInteger(Integer cursor) {
         Boolean stageClear = false;
-        if (sleeping.equals(false)) {
-            if (cursor.equals(Cursor.UP.getCursorInteger())) {
-                stageClear = stageManager.movePlayer(Cursor.UP);
-            } else if (cursor.equals(Cursor.DOWN.getCursorInteger())) {
-                stageClear = stageManager.movePlayer(Cursor.DOWN);
-            } else if (cursor.equals(Cursor.LEFT.getCursorInteger())) {
-                stageClear = stageManager.movePlayer(Cursor.LEFT);
-            } else if (cursor.equals(Cursor.RIGHT.getCursorInteger())) {
-                stageClear = stageManager.movePlayer(Cursor.RIGHT);
-            } else if (cursor.equals(Cursor.BACK_SPACE.getCursorInteger())) {
-                stageClear = stageManager.movePlayer(Cursor.BACK_SPACE);
-            }
+        if (cursor.equals(Cursor.UP.getCursorInteger())) {
+            stageClear = stageManager.movePlayer(Cursor.UP);
+        } else if (cursor.equals(Cursor.DOWN.getCursorInteger())) {
+            stageClear = stageManager.movePlayer(Cursor.DOWN);
+        } else if (cursor.equals(Cursor.LEFT.getCursorInteger())) {
+            stageClear = stageManager.movePlayer(Cursor.LEFT);
+        } else if (cursor.equals(Cursor.RIGHT.getCursorInteger())) {
+            stageClear = stageManager.movePlayer(Cursor.RIGHT);
+        } else if (cursor.equals(Cursor.BACK_SPACE.getCursorInteger())) {
+            stageClear = stageManager.movePlayer(Cursor.BACK_SPACE);
         }
         if (stageClear.equals(true)) {
             try {
                 System.out.println("\n\n\n\n\n\nStage Clear!");
                 ConsoleOutput.printChangingStage();
                 sleep(3000);
+                arrowInput.dispose();
+                this.arrowInput = new ArrowInput(this);
                 stageManager.initStage(stageOrder.remove(0));
-                this.sleeping = true;
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Game Clear\n\n\n\n\n");
                 System.exit(0);
@@ -79,7 +77,6 @@ public class SokovanMaster {
     }
 
     private void sleep(Integer time) {
-        this.sleeping = true;
         try {
             Thread.sleep(time);
         } catch (InterruptedException e) {
